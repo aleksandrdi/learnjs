@@ -104,14 +104,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="14" />
-          <entry key="html" value="294" />
+          <entry key="html" value="299" />
           <entry key="js" value="1528" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="14" />
-          <entry key="HTML" value="294" />
+          <entry key="HTML" value="299" />
           <entry key="JavaScript" value="1528" />
         </counts>
       </usages-collector>
@@ -149,20 +149,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/script_home_work5.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
+            <state relative-caret-position="417">
               <caret line="95" column="68" selection-start-line="95" selection-start-column="68" selection-end-line="95" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="306">
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -326,12 +326,12 @@
       <workItem from="1539851976802" duration="11578000" />
       <workItem from="1540457069004" duration="4823000" />
       <workItem from="1540473505606" duration="92000" />
-      <workItem from="1540801324260" duration="10242000" />
+      <workItem from="1540801324260" duration="10524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43119000" />
+    <option name="totallyTimeSpent" value="43401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -433,6 +433,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/script_home_work5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="95" column="68" selection-start-line="95" selection-start-column="68" selection-end-line="95" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -445,15 +452,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chess.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/script_home_work5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="95" column="68" selection-start-line="95" selection-start-column="68" selection-end-line="95" selection-end-column="68" />
+        <state relative-caret-position="306">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
         </state>
       </provider>
     </entry>
