@@ -1,31 +1,29 @@
 // 1 задание, С помощью цикла while вывести все простые числа в промежутке от 0 до 100
 
-    let i = 8;
+    let numStart = 1;
+    let numEnd = 100;
+    let easyNumbers = "";
 
-    console.log(1);
-    console.log(2);
-    console.log(3);
-    console.log(5);
-    console.log(7);
-    // не знаю как первые простые числа запихнуть в  while.
-
-    while(i <= 100){
-        if (i % 2 != 0) {
-            if (i % 3 != 0) {
-                if (i % 5 != 0) {
-                    if (i % 7 != 0) {
-                        console.log(i);
-                    }
+    while(numStart < numEnd) {
+        let i = 2;
+        while (i <= numStart) {
+            if (numStart % i == 0) {
+                if (number == i) {
+                    easyNumbers += " " + numStart;
                 }
+                break;
             }
+            i++;
         }
-    i++;
+        numStart++;
     }
+
+    console.log(easyNumbers)
 
 
 // 2 задание,  С помощью цикла do…while написать функцию для вывода чисел от 0 до 10 (подсмотрел в инете)
     let a = -1;
-    do {
+
         a++;
         if (a === 0){
             console.log(a, "- это ноль");
