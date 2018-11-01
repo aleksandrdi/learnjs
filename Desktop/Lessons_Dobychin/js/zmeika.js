@@ -79,33 +79,39 @@
             else if (snakeDirection == "x+") {
                 newUnit = document.getElementsByClassName("cell-" + (coordX + 1) + "-" + coordY)[0];
             }
-
-            if (newUnit != undefined) {
+           // let foodcell = getAttribute("class").split(" ")[1];
+            if (newUnit != undefined  ) {
 
                 //добавляем новую часть змейки
                 newUnit.setAttribute("class", newUnit.getAttribute("class") + " snake-unit");
                 snake.push(newUnit);
 
+                let foodcell =  newUnit.getAttribute("class").split(" ")[2];
+                console.log(foodcell);
+                //очищаем хвост только если не натыкаемся на еду
+                if("food-unit" !=  foodcell){
+                    let removeSnake = snake.splice(0, 1)[0];
+                    let classes = removeSnake.getAttribute("class").split(" ");
+                    removeSnake.setAttribute("class", classes[0] + " " + classes[1])
 
-                //очищаем хвост
-                let removeSnake = snake.splice(0, 1)[0];
-                let classes = removeSnake.getAttribute("class").split(" ");
-                removeSnake.setAttribute("class", classes[0] + " " + classes[1])
+                } else{score++;} //если проехали еду, то довабляем счётчик
             } else {
                 finishTheGame();
             }
 
+            //проставляем счёт
+            addScore();
 
         }
     }
 
     function  addScore(){
 
-       // newUnit.setAttribute("class", newUnit.getAttribute("class") + " food-unit");
-        //if(){
-        newUnit.setAttribute("class", newUnit.getAttribute("class") + " food-unit");
 
-        score++;
+        let elem = document.getElementById("score");
+
+        document.createElement("p");
+        elem.innerText = "Счёт " + score;
 
     }
 
@@ -165,7 +171,7 @@
          respawn();
          snakeTimer = setInterval(moveSnake, snakeSpeed);
          foodTimer = setInterval(createFood, foodCreationSpeed);
-         addScore();
+
 
     }
 
