@@ -2,14 +2,19 @@
     const FIELD_SIZE_Y = 17;
     let gameIsRunning = false;
     let snake = [];
+    let block = [];
     let snakeSpeed = 1500;
     let snakeDirection = "y+"; //текущие направление движения змейки
     let snakeTimer; //таймер змейки
     let foodTimer; //таймер еды
     let blockTimer;
+    let blockClear;
+    let clearSpeed = 5000;
     let score = 0; //очки
-    let foodCreationSpeed = 1000;
-    let blockSpeed = 2000;
+    let foodCreationSpeed = 2000;
+    let blockSpeed = 3000;
+    let blockX;
+    let blockY;
 //инициализация игрового пространства
     function init() {
           prepareGameFeild();
@@ -89,7 +94,7 @@
                 snake.push(newUnit);
 
                 let checkcell =  newUnit.getAttribute("class").split(" ")[2];
-                console.log(checkcell + " 9999");
+
                 //очищаем хвост только если не натыкаемся на еду
                 switch(checkcell) {
                     case "food-unit":
@@ -104,15 +109,10 @@
                         gameIsRunning = false;
                         alert("Вы врезались в препятствие!");
                         break;
+
                 }
 
-             /*   if("food-unit" !=  checkcell){
-                    let removeSnake = snake.splice(0, 1)[0];
-                    let classes = removeSnake.getAttribute("class").split(" ");
-                    removeSnake.setAttribute("class", classes[0] + " " + classes[1])
 
-                } else{score++;} //если съели еду, то довабляем счётчик
-*/
             } else {
                 finishTheGame();
             }
@@ -125,7 +125,6 @@
 
     function  addScore(){
 
-
         let elem = document.getElementById("score");
 
         document.createElement("p");
@@ -133,37 +132,56 @@
     }
 
 
-    function createFood(){
-       let foodCreated= false;
-       while(!foodCreated){
-           let foodX = Math.floor(Math.random() * (FIELD_SIZE_X));
-           let foodY = Math.floor(Math.random() * (FIELD_SIZE_Y));
+    function createFood() {
+        let foodCreated = false;
+        while (!foodCreated) {
+            let foodX = Math.floor(Math.random() * (FIELD_SIZE_X));
+            let foodY = Math.floor(Math.random() * (FIELD_SIZE_Y));
 
             let foodCell = document.getElementsByClassName("cell-" + foodX + "-" + foodY)[0];
 
-            let foodCellClasses =  foodCell.getAttribute("class").split(" ");
+            let foodCellClasses = foodCell.getAttribute("class").split(" ");
 
-            if(!foodCellClasses.includes("snake-unit")){
-            //ставим еду
-                 foodCell.setAttribute("class", foodCellClasses.join(" ") + " food-unit");
-                 foodCreated = true;
+            if (!foodCellClasses.includes("snake-unit") || !foodCellClasses.includes("block-unit")) {
+                //ставим еду
+                foodCell.setAttribute("class", foodCellClasses.join(" ") + " food-unit");
+                foodCreated = true;
             }
-       }
+        }
     }
 
     function createBlock(){
+
         let blockCreated= false;
         while(!blockCreated){
-            let foodX = Math.floor(Math.random() * (FIELD_SIZE_X));
-            let foodY = Math.floor(Math.random() * (FIELD_SIZE_Y));
-            let foodCell = document.getElementsByClassName("cell-" + foodX + "-" + foodY)[0];
-            let foodCellClasses =  foodCell.getAttribute("class").split(" ");
-            if(!foodCellClasses.includes("block-unit")){
-                //ставим стены
-                foodCell.setAttribute("class", foodCellClasses.join(" ") + " block-unit");
+            blockX = Math.floor(Math.random() * (FIELD_SIZE_X));
+            blockY = Math.floor(Math.random() * (FIELD_SIZE_Y));
+
+            let blockCell = document.getElementsByClassName("cell-" + blockX + "-" + blockY)[0];
+            let blockCellClasses =  blockCell.getAttribute("class").split(" ");
+
+            if(!blockCellClasses.includes("block-unit") || !blockCellClasses.includes("snake-unit")) {
+                //ставим блок
+                blockCell.setAttribute("class", blockCellClasses.join(" ") + " block-unit");
                 blockCreated = true;
             }
+
+            block.add(blockCell);
         }
+
+    }
+
+    function deleteBlock(){
+        let delRandom = Math.floor(Math.random() * block.length);
+
+        let delBlock = document.getElementsByClassName("cell-" + blockX + "-" + blockY)[delRandom];
+        let delCellClasses = delBlock.getAttribute("class").split(" ");
+
+        let removeBlock = delCellClasses.splice(0, 1)[0];
+
+            //стираем блок
+            delBlock.setAttribute("class", removeBlock[0] + " " + removeBlock[1]);
+
     }
 
     function changeSnakeDirection(e){
@@ -203,9 +221,12 @@
          snakeTimer = setInterval(moveSnake, snakeSpeed);
          foodTimer = setInterval(createFood, foodCreationSpeed);
          blockTimer = setInterval(createBlock, blockSpeed);
+         blockClear = setInterval(deleteBlock, clearSpeed); //удалём через некоторое время
+
     }
 
     function renewGame(){
          location.reload();
     }
+
     window.onload = init;
