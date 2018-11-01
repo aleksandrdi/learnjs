@@ -6,8 +6,10 @@
     let snakeDirection = "y+"; //текущие направление движения змейки
     let snakeTimer; //таймер змейки
     let foodTimer; //таймер еды
+    let blockTimer;
     let score = 0; //очки
-    let foodCreationSpeed = 750;
+    let foodCreationSpeed = 1000;
+    let blockSpeed = 2000;
 //инициализация игрового пространства
     function init() {
           prepareGameFeild();
@@ -86,15 +88,31 @@
                 newUnit.setAttribute("class", newUnit.getAttribute("class") + " snake-unit");
                 snake.push(newUnit);
 
-                let foodcell =  newUnit.getAttribute("class").split(" ")[2];
-                console.log(foodcell);
+                let checkcell =  newUnit.getAttribute("class").split(" ")[2];
+                console.log(checkcell + " 9999");
                 //очищаем хвост только если не натыкаемся на еду
-                if("food-unit" !=  foodcell){
+                switch(checkcell) {
+                    case "food-unit":
+                        score++;
+                        break;
+                    case  "snake-unit":
+                        let removeSnake = snake.splice(0, 1)[0];
+                        let classes = removeSnake.getAttribute("class").split(" ");
+                        removeSnake.setAttribute("class", classes[0] + " " + classes[1]);
+                        break;
+                    case "block-unit":
+                        gameIsRunning = false;
+                        alert("Вы врезались в препятствие!");
+                        break;
+                }
+
+             /*   if("food-unit" !=  checkcell){
                     let removeSnake = snake.splice(0, 1)[0];
                     let classes = removeSnake.getAttribute("class").split(" ");
                     removeSnake.setAttribute("class", classes[0] + " " + classes[1])
 
-                } else{score++;} //если проехали еду, то довабляем счётчик
+                } else{score++;} //если съели еду, то довабляем счётчик
+*/
             } else {
                 finishTheGame();
             }
@@ -112,9 +130,7 @@
 
         document.createElement("p");
         elem.innerText = "Счёт " + score;
-
     }
-
 
 
     function createFood(){
@@ -133,6 +149,21 @@
                  foodCreated = true;
             }
        }
+    }
+
+    function createBlock(){
+        let blockCreated= false;
+        while(!blockCreated){
+            let foodX = Math.floor(Math.random() * (FIELD_SIZE_X));
+            let foodY = Math.floor(Math.random() * (FIELD_SIZE_Y));
+            let foodCell = document.getElementsByClassName("cell-" + foodX + "-" + foodY)[0];
+            let foodCellClasses =  foodCell.getAttribute("class").split(" ");
+            if(!foodCellClasses.includes("block-unit")){
+                //ставим стены
+                foodCell.setAttribute("class", foodCellClasses.join(" ") + " block-unit");
+                blockCreated = true;
+            }
+        }
     }
 
     function changeSnakeDirection(e){
@@ -171,8 +202,7 @@
          respawn();
          snakeTimer = setInterval(moveSnake, snakeSpeed);
          foodTimer = setInterval(createFood, foodCreationSpeed);
-
-
+         blockTimer = setInterval(createBlock, blockSpeed);
     }
 
     function renewGame(){
